@@ -83,37 +83,6 @@ The tool supports:
 
 The user can experiment with heuristic functions in `heuristic()` for different effects.
 
-## 📅 Weekly Breakdown
-
-### Week 9: Back to Fundamentals - Algorithmic Path Planning
-
-#### **Monday: Project Kick-off & A* Theory*\*
-
-* Created `path-planning-visualizer` repo
-* Studied f(n) = g(n) + h(n) intuition
-* Planned code architecture: `Node` class, grid as 2D list, Pygame chosen for visuals
-
-#### **Tuesday: Core Implementation**
-
-* Implemented grid and `Node` structure
-* Wrote core A\* loop with open and closed sets
-
-#### **Wednesday: Making It Visual**
-
-* Visualized grid and states (start, end, barriers, open, closed, path)
-* Integrated algorithm with Pygame's drawing loop
-
-#### **Thursday: Interactivity & Heuristics**
-
-* Enabled full mouse interaction
-* Added diagonal movement with correct cost handling
-* Switched to Octile heuristic for accurate pathfinding with diagonals
-
-#### **Friday: Documentation & Polish**
-
-* Added GIF/MP4 export via `imageio`
-* Finalized README and code documentation
-
 ## 🎬 Example Outputs (A\*)
 
 <table>
