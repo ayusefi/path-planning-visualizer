@@ -30,10 +30,11 @@ By balancing cost and heuristic, A\* efficiently finds optimal paths in graphs a
 ```
 path-planning-visualizer/
 ├── astar_visualizer.py       # Main script with visualization and algorithm
-├── assets/
-│   ├── example1.gif
-│   ├── example2.gif
-│   └── example3.gif
+├── rrt_visualizer.py         # RRT* implementation in continuous space
+├── output/                   # Saved animations (.gif)
+│   ├── astar_path_*.gif
+│   └── rrt_star_path_*.gif
+├── assets/                   # (Optional) static files
 ├── README.md
 ```
 
@@ -45,7 +46,7 @@ path-planning-visualizer/
 pip install pygame imageio numpy
 ```
 
-### Launch the Visualizer
+### Launch A\* Visualizer
 
 ```bash
 python astar_visualizer.py
@@ -57,6 +58,21 @@ python astar_visualizer.py
 * **Right-click**: Erase a node
 * **Spacebar**: Start the A\* search
 * **C key**: Clear the grid
+
+### Launch RRT\* Visualizer
+
+```bash
+python rrt_visualizer.py
+```
+
+### Interactions
+
+* **Click once**: Set **start**
+* **Click again**: Set **goal**
+* **Click + drag**: Draw rectangular obstacles
+* **Press SPACE**: Run RRT\* and generate the optimized path
+
+After completion, a timestamped GIF will be saved inside the `output/` folder.
 
 ## 🧠 Heuristics
 
@@ -98,7 +114,7 @@ The user can experiment with heuristic functions in `heuristic()` for different 
 * Added GIF/MP4 export via `imageio`
 * Finalized README and code documentation
 
-## 🎬 Example Outputs
+## 🎬 Example Outputs (A\*)
 
 <table>
   <tr>
@@ -113,20 +129,56 @@ The user can experiment with heuristic functions in `heuristic()` for different 
   </tr>
 </table>
 
+## 🌲 RRT\* Path Planning in Continuous Space
+
+In addition to grid-based A\* search, this project also includes a full implementation of the **RRT\*** (Rapidly-exploring Random Tree Star) algorithm for continuous 2D path planning. This algorithm is ideal for exploring high-dimensional, continuous spaces efficiently and then optimizing paths through a local rewiring process.
+
+### 🎯 Project Goals
+
+* Implement RRT and extend it to RRT\*
+* Support mouse-based selection of start, goal, and obstacle placement
+* Visualize the growing tree and path rewiring in real time
+* Save the animation as a GIF for documentation or sharing
+
+### 🧠 What is RRT\*?
+
+RRT builds a tree by randomly sampling points in space and connecting them to the nearest node if the path is collision-free. RRT\* improves upon this by optimizing the tree:
+
+* **Choose Parent**: When adding a node, connect it to the best neighbor that minimizes the cost.
+* **Rewire**: After inserting a node, reconnect nearby nodes if doing so results in a lower-cost path.
+
+This produces a tree that improves path quality over time.
+
+### 🗂 Example Outputs (RRT\*)
+
+<table>
+  <tr>
+    <td><strong>Example 1</strong></td>
+    <td><strong>Example 2</strong></td>
+    <td><strong>Example 3</strong></td>
+  </tr>
+  <tr>
+    <td><img src="output/rrt_star_path_20250708_110212.gif" width="250"/></td>
+    <td><img src="output/rrt_star_path_20250708_110141.gif" width="250"/></td>
+    <td><img src="output/rrt_star_path_20250708_110250.gif" width="250"/></td>
+  </tr>
+</table>
+
 ## 📌 Key Features
 
-* Fully interactive grid interface
-* Real-time visualization of A\* search process
-* 4- or 8-connected movement support
-* Save animation of each run
+* Fully interactive grid and continuous-space interfaces
+* Real-time visualization of A\* and RRT\* search processes
+* 4- or 8-connected movement support for A\*
+* Sampling-based motion planning and rewiring for RRT\*
+* Timestamped GIF export for each run
 * Clean and modular codebase for extensions
 
-## 🧹 Final Notes
+## 🔎 A\* vs RRT\* Comparison
 
-This project is an ideal learning tool for students and practitioners interested in algorithms, AI, robotics, or game development. Feel free to fork, modify, or extend it!
+| Feature           | A\* (Grid-based)                       | RRT\* (Continuous)      |
+| ----------------- | -------------------------------------- | ----------------------- |
+| Space Type        | Discrete Grid                          | Continuous 2D space     |
+| Optimality        | Guaranteed (with admissible heuristic) | Asymptotically Optimal  |
+| Visual Intuition  | Expanding wavefront                    | Random tree exploration |
+| Application Focus | Known structured maps                  | Complex, dynamic spaces |
 
----
-
-## 🌐 Share Your Work
-
-> "This week I took a step back from large systems to focus on a fundamental robotics algorithm: A\*. I implemented it from scratch in Python and built this interactive visualizer with Pygame. It's incredibly satisfying to watch the algorithm work its way through a maze you've drawn! Check out the GIF and the code on my GitHub: \[Link] #robotics #ai #pathplanning #python #algorithms #pygame"
